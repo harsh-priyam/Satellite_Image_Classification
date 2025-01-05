@@ -1,0 +1,10 @@
+data_ingestion:
+  data_url: https://drive.google.com/file/d/1B9hs2D8slvbzhrZSrEm2hzZ_eVmPS465/view?usp=sharing
+  root_dir: artifacts/data_ingestion/  # Directory to extract the files
+  data_path: artifacts/data_ingestion/data.zip  # Path to the ZIP file
+
+data_preprocessing:
+  root_dir: artifacts/data_ingestion/data
+
+model_training:
+  root_dir: artifacts/model_training/resnet_model.pth/resnet_model.pth
