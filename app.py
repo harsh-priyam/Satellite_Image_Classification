@@ -5,8 +5,8 @@ from torchvision import models, transforms
 
 app = Flask(__name__)
 
-# Load the model
-model = models.resnet18(pretrained=True)
+# Load the model and weights
+model = models.resnet18()  # Do not use pretrained=True
 num_features = model.fc.in_features
 model.fc = torch.nn.Linear(num_features, 4)
 model.load_state_dict(torch.load("resnet_model.pth", map_location=torch.device('cpu')))
@@ -26,6 +26,10 @@ class_names = ['cloudy', 'desert', 'green_area', 'water']
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "OK"}), 200
 
 @app.route('/predict', methods=['POST'])
 def predict():
