@@ -14,8 +14,6 @@ RUN pip install -r requirements.txt
 # Copy the content of the local src directory to the working directory
 COPY . .
 
-# Expose port 8080
-EXPOSE 8080
 
 # Command to run the application
 CMD [ "python", "app.py" ]
