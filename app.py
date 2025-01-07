@@ -2,6 +2,10 @@ from flask import Flask, request, render_template, jsonify
 from PIL import Image
 import torch
 from torchvision import models, transforms
+import warnings
+
+# Suppress the specific FutureWarning
+warnings.filterwarnings('ignore', category=FutureWarning)
 
 app = Flask(__name__)
 
@@ -9,7 +13,8 @@ app = Flask(__name__)
 model = models.resnet18()  # Do not use pretrained=True
 num_features = model.fc.in_features
 model.fc = torch.nn.Linear(num_features, 4)
-model.load_state_dict(torch.load("resnet_model.pth", map_location=torch.device('cpu')))
+# Modified to use weights_only=True for security and to avoid the warning
+model.load_state_dict(torch.load("resnet_model.pth", map_location=torch.device('cpu'), weights_only=True))
 model.eval()
 
 # Transform
