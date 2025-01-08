@@ -6,7 +6,7 @@ import warnings
 
 # Suppress the specific FutureWarning
 warnings.filterwarnings('ignore', category=FutureWarning)
-
+PORT = 8000
 app = Flask(__name__)
 
 # Load the model and weights
@@ -64,5 +64,5 @@ def predict():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=PORT)
